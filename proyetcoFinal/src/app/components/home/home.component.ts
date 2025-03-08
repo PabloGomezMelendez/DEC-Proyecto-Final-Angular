@@ -1,4 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { Ianime } from '../../interface/ianime';
+import { TopSeviceService } from '../../services/top-sevice.service';
+import { Irespuesta } from '../../interface/irespuesta';
 
 @Component({
   selector: 'app-home',
@@ -6,6 +9,18 @@ import { Component } from '@angular/core';
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'
 })
-export class HomeComponent {
+export class HomeComponent  implements OnInit{
+  animes!: Ianime[];
 
+  constructor(private serviciosProductos: TopSeviceService) { }
+
+  ngOnInit(): void {
+    this.serviciosProductos.obtenerTopAnime().subscribe((data: Irespuesta) => {
+      this.animes = data.data;
+      console.log(this.animes);
+      console.log(this.animes[0].titles);
+      console.log(this.animes[0].images.jpg.image_url);
+
+    });
+  }
 }
