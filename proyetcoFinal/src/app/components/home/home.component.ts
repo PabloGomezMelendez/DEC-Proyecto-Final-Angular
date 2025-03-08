@@ -17,10 +17,6 @@ export class HomeComponent  implements OnInit{
   ngOnInit(): void {
     this.serviciosProductos.obtenerTopAnime().subscribe((data: Irespuesta) => {
       this.animes = data.data;
-      console.log(this.animes);
-      console.log(this.animes[0].titles);
-      console.log(this.animes[0].images.jpg.image_url);
-
     });
   }
 }

@@ -1,1 +1,59 @@
-<p>biblioteca-anime works!</p>
+<!-- Componente Home -->
+<!-- Sección de bienvenida y top 5 animes -->
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+            <h1 class="text-center">Bienvenido a la página de Animes y Mangas</h1>
+        </div>
+    </div>
+    <!-- top 5 animes y mangas -->
+    <div class="accordion" id="accordionExample">
+        <!-- Filtro de busqueda -->
+        <div class="accordion-item">
+            <h2 class="accordion-header">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                    Filtros de Animes
+                </button>
+            </h2>
+            <div id="collapseThree" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                <div class="accordion-body">
+                    <strong>filtro</strong>
+                </div>
+            </div>
+        </div>
+        <div class="accordion-item">
+            <h2 class="accordion-header">
+                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne"
+                    aria-expanded="true" aria-controls="collapseOne">
+                    Biblioteca de Anime
+                </button>
+            </h2>
+            <div id="collapseOne" class="accordion-collapse collapse show" data-bs-parent="#accordionExample">
+                <div class="accordion-body">
+                    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-5 g-4">
+                        <!-- Card para mostrar los animes -->
+                        <div class="col" *ngFor="let anime of animes; let i = index">
+                            <div class="card h-100 d-flex flex-column">
+                                <!-- <div class="card-header">
+                                    <h5 class="card-title text-center">{{i+1}}</h5>
+                                </div> -->
+                                <img src="{{anime.images.webp.image_url}}" class="card-img-top"
+                                    style="width: 100%; height: 300px; object-fit: cover;" alt="{{ anime.title }}">
+                                <div class="card-body flex-grow-1">
+                                    <h5 class="card-title">{{anime.title}}</h5>
+                                    <p class="card-text">{{ anime.synopsis | slice:0:100 }}...</p>
+                                </div>
+                                <div class="card-footer">
+                                    <a href="{{ anime.url }}" class="btn btn-primary w-100" target="_blank">More
+                                        Info</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
