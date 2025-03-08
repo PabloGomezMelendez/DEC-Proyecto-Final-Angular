@@ -11,49 +11,114 @@
         <!-- Filtro de busqueda -->
         <div class="accordion-item">
             <h2 class="accordion-header">
-                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                    data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree"
+                    aria-expanded="true" aria-controls="collapseThree">
                     Filtros de Animes
                 </button>
             </h2>
-            <div id="collapseThree" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+            <div id="collapseThree" class="accordion-collapse collapse show" data-bs-parent="#accordionExample">
                 <div class="accordion-body">
-                    <strong>filtro</strong>
+                    <!-- Formulario para filtro -->
+                    <form>
+                        <!-- Tutulo del Anime -->
+                        <div class="mb-3">
+                            <label for="tituloAnime" class="form-label">Buscar Anime</label>
+                            <input type="text" class="form-control" id="tituloAnime" [(ngModel)]="filtro.name" name="tituloAnime">
+                        </div>
+                        <!-- Tipo del Anime y Estado del Anime en la misma fila -->
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label for="tipoAnime" class="form-label">Tipo de Anime</label>
+                                <select class="form-control" id="tipoAnime" [(ngModel)]="filtro.type" name="tipoAnime">
+                                    <option value="">Seleccione un tipo</option>
+                                    <option value="tv">TV</option>
+                                    <option value="movie">Movie</option>
+                                    <option value="ova">OVA</option>
+                                    <option value="special">Special</option>
+                                    <option value="ona">ONA</option>
+                                    <option value="music">Music</option>
+                                    <option value="cm">CM</option>
+                                    <option value="pv">PV</option>
+                                    <option value="tv_special">TV Special</option>
+                                </select>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="estadoAnime" class="form-label">Estado de Anime</label>
+                                <select class="form-control" id="estadoAnime" [(ngModel)]="filtro.status" name="estadoAnime">
+                                    <option value="">Seleccione un tipo</option>
+                                    <option value="airing">En Emisión</option>
+                                    <option value="complete">Completo</option>
+                                    <option value="upcoming">Próximamente</option>
+                                </select>
+                            </div>
+                        </div>
+                        <!-- Genero del anime -->
+                        <div class="mb-3">
+                            <label for="generoAnime" class="form-label">Genero de Anime</label>
+                            <div id="generoAnime" class="row ms-1">
+                                <div *ngFor="let genre of genres; let i = index" class="col-6 col-md-4 col-lg-3 form-check">
+                                    <label class="form-check-label" for="{{i}}">
+                                        <input class="form-check-input" type="checkbox" [checked]="selectedValues.includes(genre.mal_id.toString())"
+                                            (change)="onCheckboxChange($event, genre.mal_id)" [value]="genre.mal_id" id="{{i}}" name="{{i}}">
+                                        {{genre.name}}
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-12">
+                                <button type="submit" class="btn btn-primary w-100" (click)="buscarAnime()">Buscar</button>
+                            </div>
+                        </div>
+                    </form>
                 </div>
             </div>
-        </div>
-        <div class="accordion-item">
-            <h2 class="accordion-header">
-                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne"
-                    aria-expanded="true" aria-controls="collapseOne">
-                    Biblioteca de Anime
-                </button>
-            </h2>
-            <div id="collapseOne" class="accordion-collapse collapse show" data-bs-parent="#accordionExample">
-                <div class="accordion-body">
-                    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-5 g-4">
-                        <!-- Card para mostrar los animes -->
-                        <div class="col" *ngFor="let anime of animes; let i = index">
-                            <div class="card h-100 d-flex flex-column">
-                                <!-- <div class="card-header">
+            <div class="accordion-item">
+                <h2 class="accordion-header">
+                    <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                        Biblioteca de Anime
+                    </button>
+                </h2>
+                <div id="collapseOne" class="accordion-collapse collapse show" data-bs-parent="#accordionExample">
+                    <div class="accordion-body">
+                        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-5 g-4">
+                            <!-- Card para mostrar los animes -->
+                            <div class="col" *ngFor="let anime of animes; let i = index">
+                                <div class="card h-100 d-flex flex-column">
+                                    <!-- <div class="card-header">
                                     <h5 class="card-title text-center">{{i+1}}</h5>
                                 </div> -->
-                                <img src="{{anime.images.webp.image_url}}" class="card-img-top"
-                                    style="width: 100%; height: 300px; object-fit: cover;" alt="{{ anime.title }}">
-                                <div class="card-body flex-grow-1">
-                                    <h5 class="card-title">{{anime.title}}</h5>
-                                    <p class="card-text">{{ anime.synopsis | slice:0:100 }}...</p>
-                                </div>
-                                <div class="card-footer">
-                                    <a href="{{ anime.url }}" class="btn btn-primary w-100" target="_blank">More
-                                        Info</a>
+                                    <img src="{{anime.images.webp.image_url}}" class="card-img-top"
+                                        style="width: 100%; height: 300px; object-fit: cover;" alt="{{ anime.title }}">
+                                    <div class="card-body flex-grow-1">
+                                        <h5 class="card-title">{{anime.title}}</h5>
+                                        <p class="card-text">{{ anime.synopsis | slice:0:100 }}...</p>
+                                    </div>
+                                    <div class="card-footer">
+                                        <a href="{{ anime.url }}" class="btn btn-primary w-100" target="_blank">More
+                                            Info</a>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
+                    <nav aria-label="..." class="container">
+                        <ul class="pagination justify-content-center">
+                            <li class="page-item disabled">
+                                <a class="page-link">Previous</a>
+                            </li>
+                            <li class="page-item"><a class="page-link" href="#">1</a></li>
+                            <li class="page-item active" aria-current="page">
+                                <a class="page-link" href="#">2</a>
+                            </li>
+                            <li class="page-item"><a class="page-link" href="#">3</a></li>
+                            <li class="page-item">
+                                <a class="page-link" href="#">Next</a>
+                            </li>
+                        </ul>
+                    </nav>
                 </div>
             </div>
         </div>
-
-
     </div>

@@ -1,6 +1,6 @@
 import { Ianime } from "./ianime";
 
-export interface Irespuesta {
+export interface IrespuestaAnime {
     pagination: any;
-    data: any[];
+    data: Ianime[];
 }
