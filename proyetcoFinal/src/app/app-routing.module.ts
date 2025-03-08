@@ -2,14 +2,24 @@ import { NgModule, Component } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { Error404Component } from './components/error404/error404.component';
 import { HomeComponent } from './components/home/home.component';
+import { BibliotecaAnimeComponent } from './components/biblioteca-anime/biblioteca-anime.component';
+import { BibliotecaMangaComponent } from './components/biblioteca-manga/biblioteca-manga.component';
 
 const routes: Routes = [
   {
-    path: '',
+    path: 'home',
     component: HomeComponent,
   },
   {
-    path: 'home',
+    path: 'listado-anime',
+    component: BibliotecaAnimeComponent,
+  },
+  {
+    path: 'listado-manga',
+    component: BibliotecaMangaComponent,
+  },
+  {
+    path: '',
     component: HomeComponent,
   },
   {
