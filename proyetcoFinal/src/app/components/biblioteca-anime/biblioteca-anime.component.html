@@ -79,53 +79,59 @@
                     </form>
                 </div>
             </div>
-            <div class="accordion-item">
-                <h2 class="accordion-header">
-                    <button class="accordion-button" type="button" data-bs-toggle="collapse"
-                        data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                        Biblioteca de Anime
-                    </button>
-                </h2>
-                <div id="collapseOne" class="accordion-collapse collapse show" data-bs-parent="#accordionExample">
-                    <div class="accordion-body">
-                        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-5 g-4">
-                            <!-- Card para mostrar los animes -->
-                            <div class="col" *ngFor="let anime of animes; let i = index">
-                                <div class="card h-100 d-flex flex-column">
-                                    <!-- <div class="card-header">
+        </div>
+        <!-- Sección de la biblioteca de animes -->
+        <div class="accordion-item">
+            <h2 class="accordion-header">
+                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne"
+                    aria-expanded="true" aria-controls="collapseOne">
+                    Biblioteca de Anime
+                </button>
+            </h2>
+            <div id="collapseOne" class="accordion-collapse collapse show" data-bs-parent="#accordionExample">
+                <div class="accordion-body">
+                    <div *ngIf="animes.length === 0" class="alert alert-warning" role="alert">
+                        No se han encontrado resultados.
+                    </div>
+                    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-5 g-4" *ngIf="animes.length > 0">
+                        <!-- Card para mostrar los animes -->
+                        <div class="col" *ngFor="let anime of animes; let i = index">
+                            <div class="card h-100 d-flex flex-column">
+                                <!-- <div class="card-header">
                                     <h5 class="card-title text-center">{{i+1}}</h5>
                                 </div> -->
-                                    <img src="{{anime.images.webp.image_url}}" class="card-img-top"
-                                        style="width: 100%; height: 300px; object-fit: cover;" alt="{{ anime.title }}">
-                                    <div class="card-body flex-grow-1">
-                                        <h5 class="card-title">{{anime.title}}</h5>
-                                        <p class="card-text">{{ anime.synopsis | slice:0:100 }}...</p>
-                                    </div>
-                                    <div class="card-footer">
-                                        <!-- <a href="{{ anime.url }}" class="btn btn-primary w-100" target="_blank">Mas información</a> -->
-                                        <a [routerLink]="['/masInfo',  anime.mal_id ]" class="btn btn-primary w-100"
-                                            target="_blank">Mas información</a>
-                                    </div>
+                                <img src="{{anime.images.webp.image_url}}" class="card-img-top"
+                                    style="width: 100%; height: 300px; object-fit: cover;" alt="{{ anime.title }}">
+                                <div class="card-body flex-grow-1">
+                                    <h5 class="card-title">{{anime.title}}</h5>
+                                    <p class="card-text">{{ anime.synopsis | slice:0:100 }}...</p>
+                                </div>
+                                <div class="card-footer">
+                                    <!-- <a href="{{ anime.url }}" class="btn btn-primary w-100" target="_blank">Mas información</a> -->
+                                    <a [routerLink]="['/masInfo',  anime.mal_id ]" class="btn btn-primary w-100"
+                                        target="_blank">Mas información</a>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <nav aria-label="..." class="container">
-                        <ul class="pagination justify-content-center">
-                            <li class="page-item disabled">
-                                <a class="page-link">Previous</a>
-                            </li>
-                            <li class="page-item"><a class="page-link" href="#">1</a></li>
-                            <li class="page-item active" aria-current="page">
-                                <a class="page-link" href="#">2</a>
-                            </li>
-                            <li class="page-item"><a class="page-link" href="#">3</a></li>
-                            <li class="page-item">
-                                <a class="page-link" href="#">Next</a>
-                            </li>
-                        </ul>
-                    </nav>
                 </div>
+                <!--FIXME: Bloque de paginación -->
+                <!-- <nav aria-label="..." class="container"> -->
+                    <!-- <ul class="pagination justify-content-center"> -->
+                        <!-- <li class="page-item disabled"> -->
+                            <!-- <a class="page-link">Previous</a> -->
+                        <!-- </li> -->
+                        <!-- <li class="page-item"><a class="page-link" href="#">1</a></li> -->
+                        <!-- <li class="page-item active" aria-current="page"> -->
+                            <!-- <a class="page-link" href="#">2</a> -->
+                        <!-- </li> -->
+                        <!-- <li class="page-item"><a class="page-link" href="#">3</a></li> -->
+                        <!-- <li class="page-item"> -->
+                            <!-- <a class="page-link" href="#">Next</a> -->
+                        <!-- </li> -->
+                    <!-- </ul> -->
+                <!-- </nav> -->
             </div>
         </div>
     </div>
+</div>
