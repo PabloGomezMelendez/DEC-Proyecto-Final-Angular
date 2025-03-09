@@ -30,7 +30,7 @@ export class BibliotecaAnimeComponent implements OnInit {
   ngOnInit(): void {
     this.serviciosBibliotecaAnime.obtenerAllAnime().subscribe((data: IrespuestaAnime) => {
       this.animes = data.data;
-      // console.log(this.animes);
+      console.log(this.animes[0].mal_id);
     });
     this.serviciosBibliotecaAnime.obtenerGenerosAnime().subscribe((data: IrespuestaGeneros) => {
       this.genres = data.data;
@@ -42,7 +42,7 @@ export class BibliotecaAnimeComponent implements OnInit {
     this.filtro.genres = this.selectedValues.join(',');
     this.serviciosBibliotecaAnime.obtenerFilterAnime(this.filtro).subscribe((data: Irespuesta) => {
       this.animes = data.data;
-      console.log(this.animes);
+      // console.log(this.animes[0].mal_id);
     });
   }
 

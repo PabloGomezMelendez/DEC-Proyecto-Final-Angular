@@ -1,15 +1,31 @@
+import { Igeneros } from "./igeneros";
+import { Itrailer } from "./itrailer";
+
 export interface Ianime {
-    id: string;
+    mal_id: number;
+    url: string;
     titles: string[];
     title: string;
-    images: {jpg: {image_url:string}, webp: {image_url:string}};
+    images: {
+        jpg: {
+            image_url: string,
+            small_image_url: string,
+            large_image_url: string
+        },
+        webp: {
+            image_url: string,
+            small_image_url: string,
+            large_image_url: string
+        }
+    };
     synopsis: string;
     episodes: number;
     status: string;
-    trailer_url: string;
-    genres: string[];
-    themes: string[];
+    trailer: Itrailer;
+    genres: Igeneros[];
+    themes: Igeneros[];
+    rating: string;
     demographics: string;
-    url: string;
+    approved: boolean;
 
 }

@@ -22,7 +22,10 @@ export class HomeComponent implements OnInit {
     });
     this.serviciosProductos.obtenerTopMangas().subscribe((data: Irespuesta) => {
       this.mangas = data.data;
-      console.log(this.mangas);
+      // console.log(this.mangas);
     });
+  }
+  idNumberAnime(id: string) {
+    return parseInt(id);
   }
 }

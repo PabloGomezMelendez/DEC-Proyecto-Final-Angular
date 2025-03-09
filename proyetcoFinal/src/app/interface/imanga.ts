@@ -1,5 +1,5 @@
 export interface Imanga {
-    id: string;
+    mal_id: number;
     titles: string[];
     title: string;
     images: {jpg: {image_url:string}, webp: {image_url:string}};

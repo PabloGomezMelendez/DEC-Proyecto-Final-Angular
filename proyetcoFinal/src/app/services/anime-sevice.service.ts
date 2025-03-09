@@ -20,10 +20,15 @@ export class AnimeSeviceService {
   obtenerAllAnime() {
     return this.HttpClient.get<any>(`${URL_ALL_ANIME}`);
   }
+  //Metodo que devuelve un anime por su id
+  obtenerAnimeById(Id: number) {
+    return this.HttpClient.get<any>(`${URL_ALL_ANIME}/${Id}/full`);
+  }
+  //Metodo que devuelve los generos de anime
   obtenerGenerosAnime() {
     return this.HttpClient.get<any>(`${URL_GENRES_ANIME}`);
   }
-  //Metodo que devuelve los generos de anime
+  //Metodo que devuelve los animes usnado un filtro
   obtenerFilterAnime(filtro: IfiltroAnime) {
     let url = `${URL_FILTER_ANIME}`;
     if (filtro.name && filtro.name.trim() !== '') {

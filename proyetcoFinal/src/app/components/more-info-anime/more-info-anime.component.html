@@ -1,0 +1,76 @@
+<div class="container mt-4" *ngIf="anime">
+    <h2>{{ anime.title }}</h2>
+    <div class="row mt-3">
+        <div class="col-md-4">
+            <img [src]="anime.images.webp.image_url" alt="{{ anime.title }}" class="img-fluid mb-3">
+        </div>
+        <div class="col-md-8">
+            <div class="row">
+                <!-- Información General -->
+                <div class="col-md-6">
+                    <h5>Información General</h5>
+                    <p><strong>Género:</strong> <span *ngFor="let genre of anime.genres; let isLast = last">{{
+                            genre.name }}<span *ngIf="!isLast">, </span></span></p>
+                    <p><strong>Fecha de lanzamiento:</strong> {{ anime.aired.from | date:'dd/MM/yyyy' }}</p>
+                    <p><strong>Fecha de Fin:</strong> {{ anime.aired.to | date:'dd/MM/yyyy' }}</p>
+                    <p><strong>Estado:</strong> {{ anime.status }}</p>
+                    <p><strong>Rating:</strong>
+                        <span *ngIf="anime.rating.startsWith('G')" class="text-success">🟢 {{ anime.rating }}</span>
+                        <span *ngIf="anime.rating.startsWith('PG')" class="text-primary">🔵 {{ anime.rating }}</span>
+                        <span *ngIf="anime.rating.startsWith('PG-13')" class="text-warning">🟡 {{ anime.rating }}</span>
+                        <span *ngIf="anime.rating.startsWith('R')" class="text-danger">🔴 {{ anime.rating }}</span>
+                        <span *ngIf="anime.rating.startsWith('R+') || anime.rating.startsWith('Rx')" class="text-dark">⚫
+                            {{ anime.rating }}</span>
+                    </p>
+                </div>
+                <!-- Detalles Adicionales -->
+                <div class="col-md-6">
+                    <h5>Detalles Adicionales</h5>
+                    <p><strong>Estudio:</strong> {{ anime.studios[0].name }}</p>
+                    <p><strong>Episodios:</strong> {{ anime.episodes }}</p>
+                    <p><strong>Duración:</strong> {{ anime.duration }}</p>
+                    <p>
+                        <span *ngIf="anime.approved" class="text-success">✔ Aprobado</span>
+                        <span *ngIf="!anime.approved" class="text-danger">✘ No Aprobado</span>
+                    </p>
+                    <div class="d-flex gap-3 mb-2">
+                        <div class="d-flex align-items-center me-1">
+                            <i class="bi bi-fire me-1"></i> <span>{{ anime.popularity }}</span>
+                        </div>
+                        <div class="d-flex align-items-center me-1">
+                            <i class="bi bi-people me-1"></i> <span>{{ anime.members }}</span>
+                        </div>
+                        <div class="d-flex align-items-center">
+                            <i class="bi bi-heart me-1"></i> <span>{{ anime.favorites }}</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="mt-3">
+                    <div class="d-flex flex-wrap">
+                        <h5 class="me-3">Streaming:</h5>
+                        <div *ngFor="let stream of anime.streaming" class="me-3 ">
+                            <i class="bi bi-play-circle me-1"></i>
+                            <strong><a [href]="stream.url" target="_blank">{{ stream.name }}</a></strong>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="mt-3">
+        <p><strong>Sinopsis:</strong> {{ anime.synopsis }}</p>
+    </div>
+    <div class="mt-3">
+        <h5>Tráiler</h5>
+        <div *ngIf="anime.trailer && anime.trailer.embed_url; else noTrailer" class="d-flex justify-content-center">
+            <iframe [src]="anime.trailer.embed_url | safeUrl" width="560" height="315" frameborder="0" allowfullscreen (error)="trailerError = true"></iframe>
+            <div *ngIf="trailerError">
+            <p>No se ha encontrado el tráiler.</p>
+            </div>
+        </div>
+        <ng-template #noTrailer>
+            <p>No existe tráiler disponible.</p>
+        </ng-template>
+    </div>
+</div>

@@ -4,8 +4,13 @@ import { Error404Component } from './components/error404/error404.component';
 import { HomeComponent } from './components/home/home.component';
 import { BibliotecaAnimeComponent } from './components/biblioteca-anime/biblioteca-anime.component';
 import { BibliotecaMangaComponent } from './components/biblioteca-manga/biblioteca-manga.component';
+import { MoreInfoAnimeComponent } from './components/more-info-anime/more-info-anime.component';
 
 const routes: Routes = [
+  {
+    path: 'masInfo/:id',
+    component: MoreInfoAnimeComponent,
+  },
   {
     path: 'home',
     component: HomeComponent,
